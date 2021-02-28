@@ -44,7 +44,7 @@ Launch neovim using `nvim`
 (Optional) Install plugins: `:PlugInstall` inside `nvim`
 
 ## TMUX
-Does not seem to work well with TMUX currently --- TODO
+Does not seem to work well with TMUX currently --- works fine with ctrl+A mapping instead of default ctrl+B
 
 ## Keybindings
 TODO
