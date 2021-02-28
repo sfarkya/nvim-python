@@ -48,6 +48,7 @@ SHELL ["/bin/zsh", "-lc"]
 RUN exec /bin/zsh
 WORKDIR /root
 
+RUN sh -a alias gitacp(){git add "$1";  git commit -m "$2" ; git push}
 RUN apt-get update --fix-missing
 RUN apt-get install -y software-properties-common make autoconf automake \
     pkg-config gcc build-essential g++  git wget libperl-dev cmake \
@@ -98,7 +99,7 @@ ENV FZF_CTRL_T_OPTS="--preview '[[ $(file --mime {}) =~ binary ]] && \
                 cat {}) 2> /dev/null | head -500'"
 ENV FZF_BASE=/root/.fzf
 
-RUN python3.7 -m pip install tornado 'python-language-server[all]' powerline-status powerline-gitstatus ipykernel jupyter jupyter_console notedown pillow  seaborn flake8 flake8-mypy yapf doq isort rope pylint sklearn  scikit-image pandas Pillow pytest tornado greenlet pynvim neovim jedi parso==0.7.0 jedi-language-server debugpy rich matplotlib opencv-python ipython setuptools beautifulsoup4 colorama cython hickle image-classifiers==1.0.0b1 imageio imagesize lxml  numpy==1.16.4 requests scikit-learn tabulate tqdm wget xmltodict xxhash
+RUN python3.7 -m pip install tornado 'python-language-server[all]' powerline-status powerline-gitstatus ipykernel jupyter jupyter_console notedown pillow  seaborn flake8 flake8-mypy yapf doq isort rope pylint sklearn  scikit-image pandas Pillow pytest tornado greenlet pynvim neovim jedi parso==0.7.0 jedi-language-server debugpy rich matplotlib opencv-python ipython setuptools beautifulsoup4 colorama cython hickle image-classifiers==1.0.0b1 imageio imagesize lxml  numpy==1.16.4 requests scikit-learn tabulate tqdm wget xmltodict xxhash googledrivedownloader albumentations simple_gpu_scheduler
 
 RUN if [[ -n "$GPU" ]] ; then  python3.7 -m pip  install  torch torchvision tensorflow-gpu==1.15.0 keras==2.3.0; else  python3.7 -m pip install  tensorflow==1.15.0 keras==2.3.0 torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html; fi
 RUN  python3.7 -m pip install  git+https://github.com/tensorflow/cleverhans.git#egg=cleverhans
@@ -112,6 +113,7 @@ RUN mkdir /root/.config/nvim
 COPY init.vim /root/.config/nvim/init.vim
 RUN nvim --headless +PlugInstall +qall
 RUN nvim --headless +PlugInstall +qall
+COPY .tmux.conf /root/.tmux.conf
 
 WORKDIR /root
 EXPOSE 8888
