@@ -299,6 +299,7 @@ set updatetime=250
 "
 set laststatus=2 " Always display the statusline in all windows
 set clipboard+=unnamedplus
+let g:airline#extensions#tabline#buffer_nr_show = 1
 "
 " let g:deoplete#enable_at_startup = 1
 " autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
